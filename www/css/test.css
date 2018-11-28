@@ -21,7 +21,7 @@ html, body {
     max-height: 100%;
     margin: 0;
     padding-top: 15px;
-    background-color: #074c00;
+    background-color: #076700;
 }
 
 .col-sm-2 {
@@ -63,6 +63,32 @@ html, body {
     text-decoration: none;
     color: white;
     font-size: 3.5rem;
+    transition: all .5s;
+}
+
+.test-nextprev-btn {
+    height: 100%;
+    min-height: 100%;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 2.4rem;
+    transition: all .5s;
+}
+
+.test-nextprev-btn:hover {
+    height: 100%;
+    min-height: 100%;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 2.9rem;
     transition: all .5s;
 }
 

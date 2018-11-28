@@ -33,24 +33,26 @@ final class SignUpFormFactory
 	public function create(callable $onSuccess)
 	{
 		$form = $this->factory->create();
-		$form->addText('username', 'Pick a username:')
-			->setRequired('Please pick a username.');
+		$form->addText('login', 'Přihlašovací jméno:')
+			->setRequired('Prosím zadejte své přihlašovací jméno.');
 
-		$form->addEmail('email', 'Your e-mail:')
-			->setRequired('Please enter your e-mail.');
+		$form->addPassword('password', 'Heslo:')
+			->setRequired('Prosím zadejte své heslo.');
 
-		$form->addPassword('password', 'Create a password:')
-			->setOption('description', sprintf('at least %d characters', self::PASSWORD_MIN_LENGTH))
-			->setRequired('Please create a password.')
-			->addRule($form::MIN_LENGTH, null, self::PASSWORD_MIN_LENGTH);
+		$form->addPassword('password_again', 'Heslo znovu:')
+			->setRequired('Prosím zadejte své heslo.');
 
-		$form->addSubmit('send', 'Sign up');
+		$form->addSubmit('send', 'Registrovat');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
+			if ($values['password'] !== $values['password_again']) {
+				$form['password_again']->addError('Hesla se musí shodovat!');
+				return;
+			}
 			try {
-				$this->userManager->add($values->username, $values->email, $values->password);
+				$this->userManager->add($values->login, $values->password);
 			} catch (Model\DuplicateNameException $e) {
-				$form['username']->addError('Username is already taken.');
+				$form['login']->addError('Přihlšovací jméno je již obsazeno.');
 				return;
 			}
 			$onSuccess();

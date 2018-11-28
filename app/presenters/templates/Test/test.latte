@@ -1,109 +1,198 @@
 {block content}
-
 <div class="container jmb-test" align="center">
-    <div class="jumbotron jumb">
-        <div class="container">
-            <div class="row">
-                <div class="col" style="color:#e9ecef;">
-                    <h1 style="color:whitesmoke;">Poznávací test</h1>
-                    <span class="float-right font-weight-bold mb-1">Zbývající čas: 2:14</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    {*<div class="progress mb-3" style="height: 1px;">*}
-                        {*<div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>*}
-                    {*</div>*}
-                    <div class="progress mb-3">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-2 pl-0">
-                    {*<button class="btn btn-primary mr-auto" style="min-height: 100%;background: transparent; border: none; min-width: 100px;"><</button>*}
-                    <a href="" class="test-nextprev-btn">
-                        <i class="fas fa-arrow-circle-left"></i>
-                    </a>
-                </div>
-                <div class="col-sm-8" style="position:center;min-height: 100%">
-                    <div class="row">
-                        <div class="col pt-2 pb-2">
-                            <h2 style="color: #e9ecef;">Otázka č. 5</h2>
-                            <div class="pt-2 pb-4">
-                                <img src="{$basePath}/images/sykora_konadra.jpg" class="img-fluid rounded test-img" alt="Sýkora koňadra" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pt-3 pb-3">
-                        <div class="col p-1">
-                            <button class="btn btn-primary test-ans-button font-weight-bold" style="width: 100%;">1. Odpověď</button>
-                        </div>
-                        <div class="col p-1">
-                            <button class="btn btn-primary test-ans-button font-weight-bold" style="width: 100%;">2. Odpověď</button>
-                        </div>
-                    </div>
-                    <div class="row pt-3 pb-1">
-                        <div class="col p-1">
-                            <button class="btn btn-primary test-ans-button font-weight-bold" style="width: 100%;">3. Odpověď</button>
-                        </div>
-                        <div class="col p-1">
-                            <button class="btn btn-primary test-ans-button font-weight-bold" style="width: 100%;">4. Odpověď</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col pt-4"></div>
-                    </div>
-                </div>
-                <div class="col-sm-2 ">
-                    <a href="" class="test-nextprev-btn ml-auto">
-                        <i class="fas fa-arrow-circle-right ml-auto"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col pt-4 pb-4">
-                    <div class="d-flex justify-content-start">
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: #8ad62f">1</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: #8ad62f">2</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">3</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: #8ad62f">4</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-warning" style="background: white">5</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">6</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">7</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">8</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">9</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">10</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">11</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">12</div>
-                        <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">13</div>
-                    </div>
-                    {*<div class="d-flex justify-content-start">*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: white">1</div>*}
-                        {*<div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="background: cadetblue">2</div>*}
-                    {*</div>*}
-                </div>
-            </div>
-        </div>
+	<div class="jumbotron jumb">
+
+	        <div class="container">
+	            <div class="row">
+	                <div class="col" style="color:#e9ecef;">
+	                    <h1 style="color:whitesmoke;">Poznávací test</h1>
+		                <script>
+			                var jo;
+                            function startTimer(duration, display, progr) {
+                                var timer = duration, minutes, seconds;
+                                var procents = 100;
+                                setInterval(function () {
+                                    minutes = parseInt(timer / 60, 10);
+                                    seconds = parseInt(timer % 60, 10);
+
+                                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                    jo = timer;
+
+                                    display.textContent = minutes + ":" + seconds;
+                                    procents = (timer / duration) * 100;
+                                    if(procents > 60) {
+                                        progr.classList.add('bg-success');
+                                    }
+                                    else if(procents > 30) {
+                                        progr.classList.add('bg-warning');
+                                    }
+                                    else {
+                                        progr.classList.add('bg-danger');
+                                    }
+                                    progr.style.width = procents + "%";
+
+                                    if (--timer < 0) {
+                                        $.nette.ajax({
+                                            url: '?timer='+timer+'&do=SendTest'
+                                        });
+                                    }
+                                }, 1000);
+                            }
+
+                            function doneTest() {
+                                $.nette.ajax({
+                                    url: '?timer='+jo+'&do=SendTest'
+                                });
+                            }
+
+                            var time = {$testQuestions['testInfo']->time}
+                            window.onload = function () {
+                                time = {$testQuestions['testInfo']->time},
+                                    display = document.querySelector('#time');
+                                    progr = document.querySelector('#progress-bar');
+                                startTimer(time, display, progr);
+                            };
+		                </script>
+		                {$timer}
+		                <span class="float-right font-weight-bold mb-1" id="time"></span><span class="float-right font-weight-bold mb-1">Zbývající čas:</span>
+	                </div>
+	            </div>
+
+	            <div class="row">
+	                <div class="col">
+	                    {*<div class="progress mb-3" style="height: 1px;">*}
+	                        {*<div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>*}
+	                    {*</div>*}
+	                    <div class="progress mb-3">
+	                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
+	                    </div>
+	                </div>
+	            </div>
+		        {snippet testSnippet}
+	            <div class="row">
+	                <div class="col-sm-2 pl-0">
+		                {if ($currentQuestion > 1)}
+		                    <a n:href="PreviousQuestion!" class="ajax test-nextprev-btn">
+		                        <i class="fas fa-arrow-circle-left"></i>
+		                    </a>
+		                {/if}
+	                </div>
+	                <div class="col-sm-8" style="position:center;min-height: 100%">
+	                    <div class="row">
+	                        <div class="col pt-2 pb-2">
+	                            <h2 style="color: #e9ecef;">Otázka č. {$currentQuestion}: {$testQuestions['testQuestions'][$currentQuestion]->question}</h2>
+	                            <div class="pt-2 pb-4">
+	                                <img src="{$testQuestions['testQuestions'][$currentQuestion]->label}" class="img-fluid rounded test-img" alt="Sýkora koňadra" />
+	                            </div>
+	                        </div>
+	                    </div>
+		                {if $testQuestions['testQuestions'][$currentQuestion]->A && $testQuestions['testQuestions'][$currentQuestion]->B}
+			                <div class="row pt-3 pb-3">
+		                        <div class="col p-1">
+			                        {if $testQuestions['testDoneQuestions'][$currentQuestion]->answer == A}
+			                            <a n:href="RemoveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, A"
+					                            class="ajax btn btn-primary test-ans-button font-weight-bold test-btn-active" style="width: 100%; color:white;">
+				                            A: {$testQuestions['testQuestions'][$currentQuestion]->A}
+			                            </a>
+			                        {else}
+				                        <a n:href="SaveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, A"
+						                        class="ajax btn btn-primary test-ans-button font-weight-bold" style="width: 100%; color:white;">
+					                        A: {$testQuestions['testQuestions'][$currentQuestion]->A}
+				                        </a>
+			                        {/if}
+		                        </div>
+		                        <div class="col p-1">
+			                        {if $testQuestions['testDoneQuestions'][$currentQuestion]->answer == B}
+				                        <a n:href="RemoveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, B"
+						                        class="ajax btn btn-primary test-ans-button font-weight-bold test-btn-active" style="width: 100%; color:white;">
+					                        B: {$testQuestions['testQuestions'][$currentQuestion]->B}
+				                        </a>
+			                        {else}
+				                        <a n:href="SaveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, B"
+						                        class="ajax btn btn-primary test-ans-button font-weight-bold" style="width: 100%; color:white;">
+					                        B: {$testQuestions['testQuestions'][$currentQuestion]->B}
+				                        </a>
+			                        {/if}
+		                        </div>
+		                    </div>
+		                {/if}
+		                {if $testQuestions['testQuestions'][$currentQuestion]->C && $testQuestions['testQuestions'][$currentQuestion]->D}
+		                    <div class="row pt-3 pb-1">
+		                        <div class="col p-1">
+			                        {if $testQuestions['testDoneQuestions'][$currentQuestion]->answer == C}
+				                        <a n:href="RemoveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, C"
+						                        class="ajax btn btn-primary test-ans-button font-weight-bold test-btn-active" style="width: 100%; color:white;">
+					                        C: {$testQuestions['testQuestions'][$currentQuestion]->C}
+				                        </a>
+			                        {else}
+				                        <a n:href="SaveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, C"
+						                        class="ajax btn btn-primary test-ans-button font-weight-bold" style="width: 100%; color:white;">
+					                        C: {$testQuestions['testQuestions'][$currentQuestion]->C}
+				                        </a>
+			                        {/if}
+		                        </div>
+		                        <div class="col p-1">
+			                        {if $testQuestions['testDoneQuestions'][$currentQuestion]->answer == D}
+				                        <a n:href="RemoveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, D"
+						                        class="ajax btn btn-primary test-ans-button font-weight-bold test-btn-active" style="width: 100%; color:white;">
+					                        D: {$testQuestions['testQuestions'][$currentQuestion]->D}
+				                        </a>
+			                        {else}
+				                        <a n:href="SaveAnswer!, $testQuestions['testQuestions'][$currentQuestion]->idquestion, D"
+						                        class="ajax btn btn-primary test-ans-button font-weight-bold" style="width: 100%; color:white;">
+					                        D: {$testQuestions['testQuestions'][$currentQuestion]->D}
+				                        </a>
+			                        {/if}
+		                        </div>
+		                    </div>
+		                {/if}
+	                    <div class="row">
+	                        <div class="col pt-4"></div>
+	                    </div>
+	                </div>
+	                <div class="col-sm-2 ">
+		                {if $currentQuestion < count($testQuestions['testDoneQuestions'])}
+		                    <a n:href="NextQuestion!" class="ajax test-nextprev-btn ml-auto">
+		                        <i class="fas fa-arrow-circle-right ml-auto"></i>
+		                    </a>
+		                {elseif $currentQuestion == count($testQuestions['testDoneQuestions'])}
+			                <a href="javascript:doneTest()" class="test-nextprev-btn ml-auto">
+				                Dokončit
+			                </a>
+		                {/if}
+	                </div>
+	            </div>
+	            <div class="row ">
+	                <div class="col pt-4 pb-4">
+	                    <div class="d-flex">
+		                    {var $i = 1}
+		                    {foreach $testQuestions['testDoneQuestions'] as $questionKey => $question}
+			                    {if $currentQuestion == $questionKey}
+				                    {var $border = "warning"}
+				                    {var $marg = '0'}
+			                    {else}
+				                    {var $border = "primary"}
+				                    {var $marg = '2px'}
+		                        {/if}
+			                    {if $question->answered}
+				                    {var $background = '8ad62f'}
+			                    {else}
+				                    {var $background = "ffffff"}
+		                        {/if}
+			                    <a n:href="ChangeQuestion!, $questionKey" class="ajax">
+	                                <div class="pl-3 pr-3 pt-2 pb-2 mr-1 border border-{$border}" style="color:black; text-decoration:none; background: #{$background};margin-top:{$marg};"><b>{$questionKey}</b></div>
+			                    </a>
+		                    {/foreach}
+		                    <a href="javascript:doneTest()" class="ml-auto">
+		                        <div class="ml-auto pl-3 pr-3 pt-2 pb-2 mr-1 border border-primary" style="float:right;color:black; text-decoration:none; background: #8ad62f;margin-top:0;"><b>Odeslat test</b></div>
+		                    </a>
+	                    </div>
+	                </div>
+	            </div>
+		        {/snippet}
+	        </div>
+
     </div>
 </div>

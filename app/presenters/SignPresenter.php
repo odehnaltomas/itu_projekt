@@ -25,6 +25,20 @@ final class SignPresenter extends BasePresenter
 	}
 
 
+	public function actionIn() {
+		if ($this->user->isLoggedIn()) {
+			$this->redirect('Homepage:');
+		}
+	}
+
+
+	public function actionUp() {
+		if ($this->user->isLoggedIn()) {
+			$this->redirect('Homepage:');
+		}
+	}
+
+
 	/**
 	 * Sign-in form factory.
 	 * @return Form

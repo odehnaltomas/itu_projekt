@@ -1,0 +1,50 @@
+{block content}
+<div class="first-div"></div>
+
+<div class="container mb-5">
+	<h1 class="display-3 header" align="center" n:block=title>Přehled testů</h1>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h1 class="display-5 header">Obecné testy</h1>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+		{foreach $tests['tests'] as $test}
+			<div class="col-md-4">
+				<div class="card mb-4 shadow-sm" style="height: 100%">
+					<a n:href="Test:start $test->idtest">
+						<div class="card-header">
+							<h5>{$test->name}</h5>
+						</div>
+						<div class="card-body">
+							<h6>Úspěšnost:</h6>
+							<svg viewBox="0 0 36 36" class="circular-chart-test">
+								<path class="circle good" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+								<text x="18" y="21" class="percentage">75%</text>
+							</svg>
+							<p><strong>Obtížnost: </strong>{$test->difficulty}</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		{/foreach}
+		{*<div class="col-md-4">*}
+			{*<div class="card mb-4 shadow-sm" style="height: 100%">*}
+				{*<a href="#">*}
+					{*<div class="card-header">*}
+						{*<h5>Název testu asi bych měl dát</h5>*}
+					{*</div>*}
+					{*<div class="card-body">*}
+						{*<div class="circular-chart-test jo">*}
+							{*<span>Test nesplněn</span>*}
+						{*</div>*}
+					{*</div>*}
+				{*</a>*}
+			{*</div>*}
+		{*</div>*}
+	</div>
+</div>

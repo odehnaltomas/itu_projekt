@@ -1,0 +1,145 @@
+{block content}
+
+<div class="container jmb-test">
+	<div class="jumbotron jumb">
+		<div class="container">
+			<div class="row mb" align="center" style="color:#e9ecef;">
+				<div class="col mb-4" style="color:#e9ecef;">
+					<h1 class="display-3" style="color:whitesmoke;">Test dokončen</h1>
+				</div>
+			</div>
+
+			<div class="row mb-2">
+				<div class="col">
+					<hr style="background:white;">
+				</div>
+			</div>
+
+			<div class="row mb-2" style="color:#d8dbde;">
+				<div class="col-md-1"></div>
+
+				<div class="col-sm-3">
+					<span class="h3">Název testu: </span>
+				</div>
+
+				<div class="col align-self-center" style="padding-top:8px;">
+					<strong class="h5">{$testInfo->name}</strong>
+				</div>
+
+				<div class="col-md-1"></div>
+			</div>
+
+			<div class="row mb-2" style="color:#d8dbde;">
+				<div class="col-md-1"></div>
+
+				<div class="col-sm-3">
+					<span class="h3">Čas na test: </span>
+				</div>
+
+				<div class="col align-self-left" style="padding-top:8px;">
+					<strong class="h5">{(int)($testInfo->time/60)} min {$testInfo->time%60} s</strong>
+				</div>
+
+				<div class="col-sm-3">
+					<span class="h3">Čas řešení testu: </span>
+				</div>
+
+				<div class="col align-self-left" style="padding-top:8px;">
+					<strong class="h5" style="color:#ffdd61;">{(int)($testTime/60)} min {$testTime%60} s</strong>
+				</div>
+
+				<div class="col-md-1"></div>
+			</div>
+
+			<div class="row mb-3" style="color:#d8dbde;">
+				<div class="col-md-1"></div>
+
+				<div class="col-sm-3">
+					<span class="h3">Obtížnost testu: </span>
+				</div>
+
+				<div class="col align-self-center" style="padding-top:8px;">
+					<strong class="h5">{$testInfo->difficulty}</strong>
+				</div>
+
+				<div class="col-sm-3">
+					<span class="h3">Datum řešení: </span>
+				</div>
+
+				<div class="col align-self-left" style="padding-top:8px;">
+					<strong class="h5">{$date|date:'%d.%m.%Y'}</strong>
+				</div>
+
+				<div class="col-md-1"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-sm-3"><h2 style="color:#e9ecef; text-align: left">Úspěšnost:</h2></div>
+				<div class="col-md-3">
+					<div style="background: whitesmoke;">
+						<svg viewBox="0 0 36 36" class="circular-chart-test">
+							{if $percentage > 75}
+								{var $color = 'good'}
+							{elseif $percentage > 30}
+								{var $color = 'medium'}
+							{else}
+								{var $color = 'bad'}
+							{/if}
+							<path class="circle {$color}" stroke-dasharray="{(int)$percentage}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+							<text x="18" y="21" class="percentage">{(int)$percentage}%</text>
+						</svg>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mb-2">
+				<div class="col">
+					<hr style="background:white;">
+				</div>
+			</div>
+
+			<div class="row mb-2 start-icons" style="color:rgb(255,255,255)" align="center">
+				<div class="col-md-1" style="color:#e9ecef;"></div>
+
+				<div class="col-md-4 align-self-center col-centered text-center test-play" id="startTestButton">
+					<i class="fa fa-play"></i><br>
+					<span class="text-center">Zkusit znovu</span>
+				</div>
+
+				<div class="col"></div>
+
+				<div class="col-md-4 align-self-center col-centered text-center test-play">
+					<a n:href="Test:testStatistic $testInfo->idtest" style="text-decoration: none; color: white;">
+						<div>
+							<i class="fas fa-clipboard-list"></i><br>
+							<span class="text-center">Podrobné výsledky</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-md-1" style="color:#e9ecef;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="startTestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Spuštění testu</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" align="center">
+				<h2>Opravdu chcete spustit test?</h2>
+			</div>
+			<div class="modal-footer">
+				<a n:href="Test:test $testInfo->idtest" class="btn btn-primary">Ano</a>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,112 @@
+{block content}
+
+<div class="container jmb-test">
+	<div class="jumbotron jumb">
+		<div class="container">
+			<div class="row mb" align="center" style="color:#e9ecef;">
+				<div class="col mb-4" style="color:#e9ecef;">
+					<h1 class="display-3" style="color:whitesmoke;">Informace o testu</h1>
+				</div>
+			</div>
+
+			<div class="row mb-5">
+				<div class="col">
+					<hr style="background:white;">
+				</div>
+			</div>
+
+			<div class="row mb-2" style="color:#d8dbde;">
+				<div class="col-md-1"></div>
+
+				<div class="col-sm-3">
+					<span class="h3">Název testu: </span>
+				</div>
+
+				<div class="col align-self-center" style="padding-top:8px;">
+					<strong class="h5">{$testInfo->name}</strong>
+				</div>
+
+				<div class="col-md-1"></div>
+			</div>
+
+			<div class="row mb-2" style="color:#d8dbde;">
+				<div class="col-md-1"></div>
+
+				<div class="col-sm-3">
+					<span class="h3">Čas na test: </span>
+				</div>
+
+				<div class="col align-self-center" style="padding-top:8px;">
+					<strong class="h5">{(int)($testInfo->time/60)} min {$testInfo->time%60} s</strong>
+				</div>
+
+				<div class="col-sm-4">
+					<span class="h3" style="color:#ffdd61;">Tento test jste již udělal! </span>
+				</div>
+
+				<div class="col-md-1"></div>
+			</div>
+
+			<div class="row mb-5" style="color:#d8dbde;">
+				<div class="col-md-1"></div>
+
+				<div class="col-sm-3">
+					<span class="h3">Obtížnost testu: </span>
+				</div>
+
+				<div class="col align-self-center" style="padding-top:8px;">
+					<strong class="h5">{$testInfo->difficulty}</strong>
+				</div>
+
+				<div class="col-md-1"></div>
+			</div>
+			<div class="row mb-5">
+				<div class="col">
+					<hr style="background:white;">
+				</div>
+			</div>
+
+			<div class="row mb-2 start-icons" style="color:rgb(255,255,255)" align="center">
+				<div class="col-md-1" style="color:#e9ecef;"></div>
+
+				<div class="col-md-4 align-self-center col-centered text-center test-play" id="startTestButton">
+					<i class="fa fa-play"></i><br>
+					<span class="text-center">Spustit test</span>
+				</div>
+
+				<div class="col"></div>
+
+				<div class="col-md-4 align-self-center col-centered text-center test-play">
+					<a n:href="Test:testStatistic $testInfo->idtest" style="text-decoration: none; color: white;">
+						<div>
+							<i class="fas fa-clipboard-list"></i><br>
+							<span class="text-center">Váš výsledek</span>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-md-1" style="color:#e9ecef;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="startTestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Spuštění testu</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" align="center">
+				<h2>Opravdu chcete spustit test?</h2>
+			</div>
+			<div class="modal-footer">
+				<a n:href="Test:test $testInfo->idtest" class="btn btn-primary">Ano</a>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+			</div>
+		</div>
+	</div>
+</div>

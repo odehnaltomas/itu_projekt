@@ -1,5 +1,6 @@
 html {
 	position: relative;
+    min-height: 100%;
 }
 body {
 	font-size: 15px;
@@ -214,6 +215,23 @@ form .error {
 	max-height: 250px;
 }
 
+.circular-chart-test {
+    display: block;
+    margin: 10px auto;
+    min-height: 185px;
+    max-width: 50%;
+    max-height: 250px;
+}
+
+.jo {
+    display:flex;
+    align-items:center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 .circle {
 	fill: none;
 	stroke-width: 3;
@@ -226,7 +244,7 @@ form .error {
 }
 
 .medium {
-	stroke: #c7bf0f;
+	stroke: #e3b11c;
 }
 
 .bad {
@@ -263,6 +281,7 @@ form .error {
 	transition: .5s;
 }
 
+
 .test-play:hover {
 	font-size: 48px;
 	transition: .5s;
@@ -294,4 +313,8 @@ footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+}
+
+.start-icons {
+    min-height: 200px;
 }
