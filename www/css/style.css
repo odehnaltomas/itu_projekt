@@ -219,7 +219,7 @@ form .error {
     display: block;
     margin: 10px auto;
     min-height: 185px;
-    max-width: 50%;
+    max-width: 100%;
     max-height: 250px;
 }
 
@@ -277,13 +277,13 @@ form .error {
 }
 
 .test-play {
-	font-size: 45px;
+	font-size: 44px;
 	transition: .5s;
 }
 
 
 .test-play:hover {
-	font-size: 48px;
+	font-size: 47px;
 	transition: .5s;
 	cursor: pointer;
 }

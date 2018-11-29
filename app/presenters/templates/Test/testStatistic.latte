@@ -18,10 +18,17 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col">
+							<div class="col align-self-center col-centered text-center">
 								<svg viewBox="0 0 36 36" class="circular-chart">
-									<path class="circle good" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-									<text x="18" y="21" class="percentage">75%</text>
+									{if $percentage > 75}
+										{var $color = 'good'}
+									{elseif $percentage > 30}
+										{var $color = 'medium'}
+									{else}
+										{var $color = 'bad'}
+									{/if}
+									<path class="circle {$color}" stroke-dasharray="{$percentage}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+									<text x="18" y="21" class="percentage">{$percentage}%</text>
 								</svg>
 							</div>
 						</div>
@@ -29,24 +36,44 @@
 					<div class="col-md-5 align-self-center stat">
 						<div class="row">
 							<div class="col-sm-6"><h5>Otížnost testu:</h5></div>
-							<div class="col align-self-center"><h5 class="text-test-medium">STŘEDNÍ</h5></div>
+							<div class="col align-self-center"><h5 class="text-test-medium">{$testInfo->difficulty}</h5></div>
 						</div>
 						<div class="row">
-							<div class="col-sm-6"><h5>Čas:</h5></div>
-							<div class="col align-self-center"><strong>1m 15s</strong></div>
+							<div class="col-sm-6"><h5>Čas na test:</h5></div>
+							<div class="col align-self-center"><strong>{(int)($testInfo->time/60)} min {$testInfo->time%60} s</strong></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6"><h5>Čas řešení:</h5></div>
+							<div class="col align-self-center"><strong>{(int)($testTime/60)} min {$testTime%60} s</strong></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6"><h5>Počet otázek:</h5></div>
+							<div class="col align-self-center"><strong>{count($doneTestInfo['testDoneQuestions'])}</strong></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6"><h5>Počet správných odpovědí:</h5></div>
-							<div class="col align-self-center"><strong>10</strong></div>
+							<div class="col align-self-center"><strong>{$good}</strong></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6"><h5>Počet špatných odpovědí:</h5></div>
-							<div class="col align-self-center"><strong>2</strong></div>
+							<div class="col align-self-center"><strong>{$bad}</strong></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6"><h5>Datum vyřešení:</h5></div>
+							<div class="col align-self-center"><strong>{$date|date:'%d.%m.%Y'}</strong></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6"><h5>Čas vyřešení:</h5></div>
+							<div class="col align-self-center"><strong>{$date|date:'H:i:s'}</strong></div>
 						</div>
 					</div>
 					<div class="col-md-3 align-self-center col-centered text-center test-play">
-						<i class="fa fa-play"></i><br>
-						<span class="text-center">Spustit test</span>
+						<a n:href="Test:start $testInfo->idtest">
+							<div>
+								<i class="fa fa-play"></i><br>
+								<span class="text-center">Spustit test</span>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -54,113 +81,186 @@
 	</div>
 
 	<h2>Otázky:</h2>
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>1. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample1">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+	{foreach $doneTestInfo['testDoneQuestions'] as $key => $question}
+		{if $question->answered}
+			{if $question->answer == $doneTestInfo['questions'][$key]->right_answer}
+				{var $btn_color = 'success'}
+				{var $text = 'SPRÁVNĚ'}
+			{else}
+				{var $btn_color = 'danger'}
+				{var $text = 'ŠPATNĚ'}
+			{/if}
+		{else}
+			{var $btn_color = 'danger'}
+			{var $text = 'NEVYPLNĚNO'}
+		{/if}
+		<p>
+			<a class="btn btn-{$btn_color} btn-block text-left mt-4" style="z-index:900;margin-top: 10px; border-bottom-left-radius: 0; border-bottom-right-radius: 0;" data-toggle="collapse" href="#collapseExample{$key}" role="button" aria-expanded="false" aria-controls="collapseExample">
+				<strong>{$key}. Otázka - {$text}</strong>
+			</a>
+		</p>
+		<div class="collapse" id="collapseExample{$key}" style="z-index:-1;margin-top: -16px;">
+			<div class="card card-body" style="z-index:-1;border-width: 2px; border-top:none; border-top-left-radius: 0; border-top-right-radius: 0;">
+				<div class="row">
+					<div class="col pt-2 pb-2">
+						<h3>Otázka č. {$key}: {$doneTestInfo['questions'][$key]->question}</h3>
+						<div class="pt-2 pb-4" align="center">
+							<img src="{$doneTestInfo['questions'][$key]->label}" class="img-fluid rounded" style="max-height: 300px;" alt="Sýkora koňadra" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col pt-2 pb-2">
+						<h5>Odpovědi:</h5>
+						{var $ans = 'A'}
+						{if $doneTestInfo['questions'][$key]->$ans}
+							{if $doneTestInfo['questions'][$key]->right_answer == $ans}
+								{var $ans_color = 'green'}
+							{elseif $doneTestInfo['testDoneQuestions'][$key]->answer == $ans}
+								{var $ans_color = 'red'}
+							{else}
+								{var $ans_color = 'black'}
+							{/if}
+						{/if}
+						<strong style="color:{$ans_color}">{$ans}: {$doneTestInfo['questions'][$key]->$ans}</strong><br/>
 
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>2. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample2">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+						{var $ans = 'B'}
+						{if $doneTestInfo['questions'][$key]->$ans}
+							{if $doneTestInfo['questions'][$key]->right_answer == $ans}
+								{var $ans_color = 'green'}
+							{elseif $doneTestInfo['testDoneQuestions'][$key]->answer == $ans}
+								{var $ans_color = 'red'}
+							{else}
+								{var $ans_color = 'black'}
+							{/if}
+						{/if}
+						<strong style="color:{$ans_color}">{$ans}: {$doneTestInfo['questions'][$key]->$ans}</strong><br/>
 
-	<p>
-		<a class="btn btn-danger btn-block text-left" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>3. Otázka - ŠPATNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample3">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+						{var $ans = 'C'}
+						{if $doneTestInfo['questions'][$key]->$ans}
+							{if $doneTestInfo['questions'][$key]->right_answer == $ans}
+								{var $ans_color = 'green'}
+							{elseif $doneTestInfo['testDoneQuestions'][$key]->answer == $ans}
+								{var $ans_color = 'red'}
+							{else}
+								{var $ans_color = 'black'}
+							{/if}
+						{/if}
+						<strong style="color:{$ans_color}">{$ans}: {$doneTestInfo['questions'][$key]->$ans}</strong><br/>
 
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>4. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample4">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+						{var $ans = 'D'}
+						{if $doneTestInfo['questions'][$key]->$ans}
+							{if $doneTestInfo['questions'][$key]->right_answer == $ans}
+								{var $ans_color = 'green'}
+							{elseif $doneTestInfo['testDoneQuestions'][$key]->answer == $ans}
+								{var $ans_color = 'red'}
+							{else}
+								{var $ans_color = 'black'}
+							{/if}
+						{/if}
+						<strong style="color:{$ans_color}">{$ans}: {$doneTestInfo['questions'][$key]->$ans}</strong><br/>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
+	{/foreach}
 
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>5. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample5">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+	{*<p>*}
+		{*<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>2. Otázka - SPRÁVNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample2">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
 
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>6. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample6">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+	{*<p>*}
+		{*<a class="btn btn-danger btn-block text-left" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>3. Otázka - ŠPATNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample3">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
 
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>7. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample7">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+	{*<p>*}
+		{*<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>4. Otázka - SPRÁVNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample4">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
 
-	<p>
-		<a class="btn btn-danger btn-block text-left" data-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>8. Otázka - ŠPATNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample8">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+	{*<p>*}
+		{*<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>5. Otázka - SPRÁVNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample5">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
 
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>9. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample9">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+	{*<p>*}
+		{*<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>6. Otázka - SPRÁVNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample6">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
 
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>10. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample10">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+	{*<p>*}
+		{*<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>7. Otázka - SPRÁVNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample7">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
+
+	{*<p>*}
+		{*<a class="btn btn-danger btn-block text-left" data-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>8. Otázka - ŠPATNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample8">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
+
+	{*<p>*}
+		{*<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>9. Otázka - SPRÁVNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample9">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
+
+	{*<p>*}
+		{*<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample">*}
+			{*<strong>10. Otázka - SPRÁVNĚ</strong>*}
+		{*</a>*}
+	{*</p>*}
+	{*<div class="collapse" id="collapseExample10">*}
+		{*<div class="card card-body">*}
+			{*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.*}
+		{*</div>*}
+	{*</div>*}
 </div>

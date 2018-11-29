@@ -49,6 +49,24 @@ class TestPresenter extends BasePresenter
 
 	public function rendertestStatistic($id) {
 		$this->template->testInfo = $this->testManager->getTestById($id);
+		$this->template->doneTestInfo = $this->testManager->getDoneTestInfo($this->user->getId(), $this->testId);
+		$this->template->testTime = $this->template->testInfo->time -  $this->template->doneTestInfo['doneTestInfo']->remain_time;
+		$this->template->date = $this->template->doneTestInfo['doneTestInfo']->date;
+
+		$good = 0;
+		$bad = 0;
+		foreach ($this->template->doneTestInfo['questions'] as $key => $question) {
+			if($question->right_answer == $this->template->doneTestInfo['testDoneQuestions'][$key]->answer) {
+				$good++;
+			}
+			else {
+				$bad++;
+			}
+		}
+		$this->template->good = $good;
+		$this->template->bad = $bad;
+
+		$this->template->percentage = $good / count($this->template->doneTestInfo['testDoneQuestions']) * 100;
 	}
 
 	public function actionTest($id) {

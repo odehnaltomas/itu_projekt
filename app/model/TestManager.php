@@ -31,7 +31,7 @@ class TestManager extends BaseManager
 		$test['tests'] = $this->database->query('SELECT * FROM test LEFT JOIN test_has_article ON test.idtest=test_has_article.test_idtest')->fetchAll();
 
 		$i = 1;
-		$t = $this->database->query('SELECT * FROM test LEFT JOIN test_has_article ON test.idtest=test_has_article.test_idtest WHERE test.iduser=?', $userId);
+		$t = $this->database->query('SELECT * FROM test LEFT JOIN test_has_article ON test.idtest=test_has_article.test_idtest');
 		while(1) {
 			$tmp = $t->fetch();
 			if(!$tmp) {
