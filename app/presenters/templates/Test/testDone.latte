@@ -79,9 +79,9 @@
 				<div class="col-md-3" align="center">
 					<div style="border-radius:300px;background: whitesmoke; width:195px;height:195px;">
 						<svg viewBox="0 0 36 36" class="circular-chart-test">
-							{if $percentage > 75}
+							{if $percentage >= 75}
 								{var $color = 'good'}
-							{elseif $percentage > 30}
+							{elseif $percentage >= 30}
 								{var $color = 'medium'}
 							{else}
 								{var $color = 'bad'}

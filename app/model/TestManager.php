@@ -28,21 +28,45 @@ class TestManager extends BaseManager
 
 
 	public function getTestsForList($userId) {
-		$test['tests'] = $this->database->query('SELECT * FROM test LEFT JOIN test_has_article ON test.idtest=test_has_article.test_idtest')->fetchAll();
+//		$tests['tests'] = $this->database->query('SELECT test.*, article.idarticle, article.name AS article_name FROM `test` LEFT JOIN test_has_article ON
+// 					test.idtest=test_has_article.test_idtest LEFT JOIN article on test_has_article.article_idarticle=article.idarticle ORDER BY test_has_article.article_idarticle')->fetchAll();
 
 		$i = 1;
-		$t = $this->database->query('SELECT * FROM test LEFT JOIN test_has_article ON test.idtest=test_has_article.test_idtest');
+		$t = $this->database->query('SELECT test.*, article.idarticle, article.name AS article_name FROM `test` LEFT JOIN test_has_article ON
+ 					test.idtest=test_has_article.test_idtest LEFT JOIN article on test_has_article.article_idarticle=article.idarticle ORDER BY test_has_article.article_idarticle');
 		while(1) {
 			$tmp = $t->fetch();
 			if(!$tmp) {
 				break;
 			}
-			$test['doneTests'][$i] = $tmp;
+			$tests['tests'][$i] = $tmp;
+			if($tests['tests'][$i]->idarticle == null) {
+				$tests['tests'][$i]->idarticle = 0;
+			}
 			$i++;
 		}
-		bdump($test);
 
-		return $test;
+		foreach($tests['tests'] as $key => $test) {
+			$tests['doneTestQuestions'][$key] = $this->database->query('SELECT question.*, done_question.* FROM question RIGHT JOIN done_question ON question.idquestion=done_question.question_idquestion 
+					WHERE done_question.user_done_test_test_idtest=? AND done_question.user_done_test_user_iduser=?', $key, $userId)->fetchAll();
+
+			if(count($tests['doneTestQuestions'][$key]) > 0) {
+				$good = 0;
+				$all = 0;
+				foreach ($tests['doneTestQuestions'][$key] as $question) {
+					$all++;
+					if ($question->answered) {
+						if ($question->right_answer == $question->answer) {
+							$good++;
+						}
+					}
+				}
+				$tests['doneTestQuestions'][$key]['percentage'] = ($good / $all) * 100;
+			}
+		}
+		bdump($tests);
+
+		return $tests;
 	}
 
 

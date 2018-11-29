@@ -9,7 +9,26 @@
 namespace App\Presenters;
 
 
+use App\Model\ArticleManager;
+
 class ArticlePresenter extends BasePresenter
 {
+	private $articleManager;
 
+	private $articleId;
+
+	public function __construct(ArticleManager $articleManager)
+	{
+		$this->articleManager = $articleManager;
+	}
+
+
+	public function renderDefault() {
+		$this->template->articles = $this->articleManager->getAllArticles();
+	}
+
+
+	public function actionArticle($id) {
+		$this->articleId = $id;
+	}
 }

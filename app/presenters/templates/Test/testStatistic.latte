@@ -20,9 +20,9 @@
 						<div class="row">
 							<div class="col align-self-center col-centered text-center">
 								<svg viewBox="0 0 36 36" class="circular-chart">
-									{if $percentage > 75}
+									{if $percentage >= 75}
 										{var $color = 'good'}
-									{elseif $percentage > 30}
+									{elseif $percentage >= 30}
 										{var $color = 'medium'}
 									{else}
 										{var $color = 'bad'}

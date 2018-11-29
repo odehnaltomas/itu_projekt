@@ -1,2 +1,29 @@
 {block content}
 <div class="first-div"></div>
+
+<div class="container mb-5">
+	<h1 class="display-3 header" align="center" style="color: #464646;" n:block=title>Přehled článků</h1>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-1"></div>
+
+		<div class="col">
+			<ul class="list-group mb-3">
+				{foreach $articles as $article}
+					<a n:href="Article:article $article->idarticle" class="mb-4">
+						<li class="list-group-item d-flex justify-content-left article-li" style="max-height: 192px;">
+							<div class="pt-2 pb-2 pl-3" align="center">
+								<img src="{$article->img_url}" class="img-fluid rounded" style="max-height: 150px; max-width: 225px;" alt="Sýkora koňadra" />
+							</div>
+							<span style="margin-left: 35px; margin-top: 60px; font-weight: bold; font-size: 1.5rem;">{$article->name}</span>
+						</li>
+					</a>
+				{/foreach}
+			</ul>
+		</div>
+
+		<div class="col-md-1"></div>
+	</div>
+</div>

@@ -21,6 +21,7 @@ final class RouterFactory
 		$router[] = new Route('test/testStatistic/[<id>]', array('presenter' => 'Test', 'action' => 'testStatistic'));
 		$router[] = new Route('test/start/[<id>]', array('presenter' => 'Test', 'action' => 'start'));
 		$router[] = new Route('test/testDone/[<id>]', array('presenter' => 'Test', 'action' => 'testDone'));
+		$router[] = new Route('article/article/[<id>]', array('presenter' => 'Article', 'action' => 'article'));
 		$router[] = new Route('<presenter>/<action>', 'Homepage:default');
 		return $router;
 	}

@@ -318,3 +318,11 @@ footer {
 .start-icons {
     min-height: 200px;
 }
+
+.article-li {
+    background: rgba(219,255,217,0.44);
+}
+
+.article-li:hover {
+    background: rgb(219, 255, 217);
+}
