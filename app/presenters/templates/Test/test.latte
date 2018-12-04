@@ -3,9 +3,16 @@
 	<div class="jumbotron jumb">
 
 	        <div class="container">
+		        <div class="row">
+			        <div class="col" align="right" style="margin-bottom: -30px; z-index: 900;">
+				        <div id="exitTestButton">
+				            <i class="fas fa-times cross" style="font-size: 2rem;"></i>
+				        </div>
+			        </div>
+		        </div>
 	            <div class="row">
 	                <div class="col" style="color:#e9ecef;">
-	                    <h1 style="color:whitesmoke;">Poznávací test</h1>
+	                    <h1 style="color:whitesmoke; z-index: -1;">{$testQuestions['testInfo']->name}</h1>
 		                <script>
 			                var jo;
                             function startTimer(duration, display, progr) {
@@ -33,7 +40,7 @@
                                     }
                                     progr.style.width = procents + "%";
 
-                                    if (--timer < 0) {
+                                    if (--timer <= 0) {
                                         $.nette.ajax({
                                             url: '?timer='+timer+'&do=SendTest'
                                         });
@@ -84,7 +91,11 @@
 	                        <div class="col pt-2 pb-2">
 	                            <h2 style="color: #e9ecef;">Otázka č. {$currentQuestion}: {$testQuestions['testQuestions'][$currentQuestion]->question}</h2>
 	                            <div class="pt-2 pb-4">
+		                            {if $testQuestions['testQuestions'][$currentQuestion]->type == 'IMG'}
 	                                <img src="{$testQuestions['testQuestions'][$currentQuestion]->label}" class="img-fluid rounded test-img" alt="Sýkora koňadra" />
+		                            {else}
+			                            <div style="height: 150px;"></div>
+		                            {/if}
 	                            </div>
 	                        </div>
 	                    </div>
@@ -195,4 +206,25 @@
 	        </div>
 
     </div>
+</div>
+
+<div class="modal fade" id="exitTestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Zrušení testu</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" align="center">
+				<h2>Opravdu chcete zrušit test?</h2>
+				<p>Vaše odpovědi se nezaznamenají!</p>
+			</div>
+			<div class="modal-footer">
+				<a n:href="ExitTest!" class="ajax btn btn-primary">Ano</a>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+			</div>
+		</div>
+	</div>
 </div>

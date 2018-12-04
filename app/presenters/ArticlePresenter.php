@@ -31,4 +31,11 @@ class ArticlePresenter extends BasePresenter
 	public function actionArticle($id) {
 		$this->articleId = $id;
 	}
+
+
+	public function renderArticle($id) {
+		$this->template->article = $this->articleManager->getArticleById($id);
+		$this->template->isThereTests = $this->articleManager->checkIfExistTestsToArticle($this->articleId);
+		bdump($this->template->isThereTests);
+	}
 }

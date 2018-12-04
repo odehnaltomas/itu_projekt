@@ -1,166 +1,62 @@
 {block content}
-<div class="first-div"></div>
+<div class="first-div" style="padding-top: 58px!important;"></div>
 
-<div class="container">
-	<div class="row">
-		<div class="col">
-			<h1 class="text-center">TEST: Sýkora koňadra</h1>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<div class="jumbotron statistics border border-success">
-				<div class="row">
-					<div class="col-md-3 border-right border-success">
-						<div class="row">
-							<div class="col">
-							<h2 class="text-center">Úspěšnost testu</h2>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<svg viewBox="0 0 36 36" class="circular-chart">
-									<path class="circle good" stroke-dasharray="75, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-									<text x="18" y="21" class="percentage">75%</text>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-5 align-self-center stat">
-						<div class="row">
-							<div class="col-sm-6"><h5>Otížnost testu:</h5></div>
-							<div class="col align-self-center"><h5 class="text-test-medium">STŘEDNÍ</h5></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6"><h5>Čas:</h5></div>
-							<div class="col align-self-center"><strong>1m 15s</strong></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6"><h5>Počet správných odpovědí:</h5></div>
-							<div class="col align-self-center"><strong>10</strong></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-6"><h5>Počet špatných odpovědí:</h5></div>
-							<div class="col align-self-center"><strong>2</strong></div>
-						</div>
-					</div>
-					<div class="col-md-3 align-self-center col-centered text-center test-play">
-						<i class="fa fa-play"></i><br>
-						<span class="text-center">Spustit test</span>
-					</div>
-				</div>
+<header class="business-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12" style="margin-top: 200px; font-weight: bold;">
+				<h1 class="display-3 text-center text-white mt-4">Opeřenci</h1>
 			</div>
 		</div>
 	</div>
+</header>
 
-	<h2>Otázky:</h2>
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>1. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample1">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+<div class="container">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col">
+			<h2 class="mt-4">Co zde najdete?</h2>
+			<p>Vítejte na stránce Opeřenci. Naleznete zde články o ptácích, kteří se vyskytují na území České republiky. Najdete zde také testy k většině těchto článků na ověření Vašich znalostí.
+			Pro zobrazení testů a statistik testů se prosím přihlašte.</p>
 		</div>
+		<div class="col-md-1"></div>
 	</div>
-
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>2. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample2">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+	<div class="row mt-5">
+		<div class="col-md-1"></div>
+		<div class="col-lg-3 text-center" align="center">
+			<a n:href="Article:">
+			<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3 border" style="padding-top: 10px; height: 100%;">
+				<div class="features-icons-icon">
+					<img src="{$basePath}/images/open-book.svg"  style="max-width:50px;" align="center" class="mb-3"/>
+				</div>
+				<h3>Články</h3>
+				<p class="lead mb-0">Přečtěte si články o ptácích, kteří se vyskytují na úzení ČR.</p>
+			</div>
+			</a>
 		</div>
-	</div>
-
-	<p>
-		<a class="btn btn-danger btn-block text-left" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>3. Otázka - ŠPATNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample3">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+		<div class="col-lg-4" align="center">
+			<a n:href="Test:">
+				<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3 border" style="padding-top: 10px; height: 100%;">
+					<div class="features-icons-icon">
+						<img src="{$basePath}/images/exam.svg"  style="max-width:50px;" align="center" class="mb-3"/>
+					</div>
+					<h3>Testy</h3>
+					<p class="lead mb-0">Ověřte své znalosti pomocí testů, které jsme pro Vás přichystali.</p>
+				</div>
+			</a>
 		</div>
-	</div>
-
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>4. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample4">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+		<div class="col-lg-3" align="center">
+			<a n:href="Statistics:">
+				<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3 border" style="padding-top: 10px; height: 100%;">
+					<div class="features-icons-icon">
+						<img src="{$basePath}/images/bar-chart.svg"  style="max-width:50px;" align="center" class="mb-3"/>
+					</div>
+					<h3>Statistiky</h3>
+					<p class="lead mb-0">Porovnejte své dosažené výsledky v testech s ostatními uživateli.</p>
+				</div>
+			</a>
 		</div>
+		<div class="col-md-1"></div>
 	</div>
-
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>5. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample5">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
-
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>6. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample6">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
-
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>7. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample7">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
-
-	<p>
-		<a class="btn btn-danger btn-block text-left" data-toggle="collapse" href="#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>8. Otázka - ŠPATNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample8">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
-
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>9. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample9">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
-
-	<p>
-		<a class="btn btn-success btn-block text-left" data-toggle="collapse" href="#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample">
-			<strong>10. Otázka - SPRÁVNĚ</strong>
-		</a>
-	</p>
-	<div class="collapse" id="collapseExample10">
-		<div class="card card-body">
-			Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-		</div>
-	</div>
+</div>
 </div>

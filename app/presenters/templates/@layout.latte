@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Sandbox</title>
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Opeřenci</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -33,7 +33,7 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<a class="navbar-brand" href="#">Opeřenci</a>
+	<a class="navbar-brand" n:href="Homepage:">Opeřenci</a>
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
@@ -44,7 +44,7 @@
 				<a class="nav-link" n:href="Test:default">Testy</a>
 			</li>
 			<li class="nav-item ">
-				<a class="nav-link" >Statistiky</a>
+				<a class="nav-link" n:href="Statistics:default">Statistiky</a>
 			</li>
 		</ul>
 	</div>
@@ -70,7 +70,6 @@
 					</a>
 					<div id="navbarDropdownAccountBubble" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownAccountLink">
 						<a class="dropdown-item" n:href="Sign:out">Odhlášení</a>
-						<a class="dropdown-item" >Nastavení</a>
 					</div>
 				</li>
 			</ul>

@@ -31,4 +31,23 @@ class ArticleManager extends BaseManager
 	public function getAllArticles() {
 		return $this->database->table(self::TABLE_ARTICLE)->fetchAll();
 	}
+
+
+	public function getArticleById($articleId) {
+		return $this->database->table(self::TABLE_ARTICLE)
+			->where(self::ARTICLE_ID_ARTICLE, $articleId)
+			->fetch();
+	}
+
+
+	public function checkIfExistTestsToArticle($articleId) {
+		$test = $this->database->table(self::TABLE_TEST_HAS_ARTICLE)
+			->where(self::TEST_HAS_ARTICLE_ID_ARTICLE, $articleId)
+			->fetch();
+
+		if($test) {
+			return true;
+		}
+		return false;
+	}
 }

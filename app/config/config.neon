@@ -22,5 +22,6 @@ services:
 	- App\Forms\SignUpFormFactory
 	- App\Model\TestManager
 	- App\Model\ArticleManager
+	- App\Model\StatisticManager
 
 	router: App\RouterFactory::createRouter

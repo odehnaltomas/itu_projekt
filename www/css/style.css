@@ -326,3 +326,87 @@ footer {
 .article-li:hover {
     background: rgb(219, 255, 217);
 }
+
+.song {
+    color: #00f6f2;
+    border: solid #045f00;
+    border-width: 2px;
+}
+
+.song:hover {
+    color: #00d8e2;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 2.1rem;!important;
+}
+
+.song h1 {
+    color: #00f6f2;
+}
+
+.song:hover h1 {
+    color: #00d8e2;
+    cursor: pointer;
+}
+
+.info:hover {
+    color: red !important;
+}
+
+.cross {
+    color: #dc3545;
+}
+
+.cross:hover {
+    color: #f80508;
+    cursor: pointer;
+}
+
+.href-tests {
+    padding-top:80px;
+    background: #dfffd3
+}
+
+.href-tests:hover {
+    background: #c1ffb0
+}
+
+.business-header {
+    height: 50vh;
+    min-height: 300px;
+    background: url('https://petplanetvi.com/wp-content/uploads/2018/08/banner5.jpg') center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

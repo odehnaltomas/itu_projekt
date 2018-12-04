@@ -31,6 +31,42 @@ class TestManager extends BaseManager
 //		$tests['tests'] = $this->database->query('SELECT test.*, article.idarticle, article.name AS article_name FROM `test` LEFT JOIN test_has_article ON
 // 					test.idtest=test_has_article.test_idtest LEFT JOIN article on test_has_article.article_idarticle=article.idarticle ORDER BY test_has_article.article_idarticle')->fetchAll();
 
+		$t = $this->database->query('SELECT * FROM user_done_test LEFT JOIN test ON user_done_test.test_idtest=test.idtest WHERE user_iduser=? ORDER BY date DESC LIMIT 4', $userId);
+
+		$tests['lastTests'] = false;
+		$i = 1;
+		while(1) {
+			$tmp = $t->fetch();
+			if(!$tmp) {
+				break;
+			}
+			$tests['lastTests'][$i] = $tmp;
+			$i++;
+		}
+
+		$key = 1;
+		if($tests['lastTests'] != false) {
+			foreach ($tests['lastTests'] as $test) {
+				$tests['lastDoneTestQuestions'][$key] = $this->database->query('SELECT question.*, done_question.* FROM question RIGHT JOIN done_question ON question.idquestion=done_question.question_idquestion 
+					WHERE done_question.user_done_test_test_idtest=? AND done_question.user_done_test_user_iduser=?', $test->idtest, $userId)->fetchAll();
+
+				if (count($tests['lastDoneTestQuestions'][$key]) > 0) {
+					$good = 0;
+					$all = 0;
+					foreach ($tests['lastDoneTestQuestions'][$key] as $question) {
+						$all++;
+						if ($question->answered) {
+							if ($question->right_answer == $question->answer) {
+								$good++;
+							}
+						}
+					}
+					$tests['lastDoneTestQuestions'][$key]['percentage'] = (int)(($good / $all) * 100);
+				}
+				$key++;
+			}
+		}
+
 		$i = 1;
 		$t = $this->database->query('SELECT test.*, article.idarticle, article.name AS article_name FROM `test` LEFT JOIN test_has_article ON
  					test.idtest=test_has_article.test_idtest LEFT JOIN article on test_has_article.article_idarticle=article.idarticle ORDER BY test_has_article.article_idarticle');
@@ -46,9 +82,10 @@ class TestManager extends BaseManager
 			$i++;
 		}
 
-		foreach($tests['tests'] as $key => $test) {
+		$key = 1;
+		foreach($tests['tests'] as $test) {
 			$tests['doneTestQuestions'][$key] = $this->database->query('SELECT question.*, done_question.* FROM question RIGHT JOIN done_question ON question.idquestion=done_question.question_idquestion 
-					WHERE done_question.user_done_test_test_idtest=? AND done_question.user_done_test_user_iduser=?', $key, $userId)->fetchAll();
+					WHERE done_question.user_done_test_test_idtest=? AND done_question.user_done_test_user_iduser=?', $test->idtest, $userId)->fetchAll();
 
 			if(count($tests['doneTestQuestions'][$key]) > 0) {
 				$good = 0;
@@ -61,10 +98,10 @@ class TestManager extends BaseManager
 						}
 					}
 				}
-				$tests['doneTestQuestions'][$key]['percentage'] = ($good / $all) * 100;
+				$tests['doneTestQuestions'][$key]['percentage'] = (int)(($good / $all) * 100);
 			}
+			$key++;
 		}
-		bdump($tests);
 
 		return $tests;
 	}
@@ -105,7 +142,7 @@ class TestManager extends BaseManager
 			$test['doneTestInfo'] = $this->database->table(self::TABLE_USER_DONE_TEST)
 				->insert([
 					self::USER_DONE_TEST_ID_TEST => $idTest,
-					self::USER_DONE_TEST_ID_USER => $idTest
+					self::USER_DONE_TEST_ID_USER => $idUser
 				]);
 		}
 
@@ -248,5 +285,22 @@ class TestManager extends BaseManager
 		}
 
 		return $test;
+	}
+
+
+	public function rollbackTest($userId, $testId) {
+		$this->database->table(self::TABLE_DONE_QUESTION)
+			->where(self::DONE_QUESTION_ID_USER, $userId)
+			->where(self::DONE_QUESTION_ID_TEST, $testId)
+			->where(self::DONE_QUESTION_OLD, 3)
+			->delete();
+
+		$this->database->table(self::TABLE_DONE_QUESTION)
+			->where(self::DONE_QUESTION_ID_USER, $userId)
+			->where(self::DONE_QUESTION_ID_TEST, $testId)
+			->where(self::DONE_QUESTION_OLD, 1)
+			->update([
+				self::DONE_QUESTION_OLD => 0
+			]);
 	}
 }

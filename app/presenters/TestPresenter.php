@@ -66,7 +66,7 @@ class TestPresenter extends BasePresenter
 		$this->template->good = $good;
 		$this->template->bad = $bad;
 
-		$this->template->percentage = $good / count($this->template->doneTestInfo['testDoneQuestions']) * 100;
+		$this->template->percentage = (int)($good / count($this->template->doneTestInfo['testDoneQuestions']) * 100);
 	}
 
 	public function actionTest($id) {
@@ -76,8 +76,6 @@ class TestPresenter extends BasePresenter
 		$this->template->testQuestions = $this->testManager->getTestWithEmptyQuestions($this->testId, $this->user->getId());
 		$this->template->currentQuestion = $this->sessionTest->currentQuestion;
 		$this->template->timer = $this->timer;
-		bdump($this->template->testQuestions);
-		bdump($this->timer);
 	}
 
 	public function renderDefault() {
@@ -132,6 +130,14 @@ class TestPresenter extends BasePresenter
 		if($this->isAjax()) {
 			$this->testManager->saveDoneTest($this->user->getId(), $this->testId, $timer);
 			$this->redirect('Test:testDone', $this->testId);
+		}
+	}
+
+
+	public function handleExitTest($timer) {
+		if($this->isAjax()) {
+			$this->testManager->rollbackTest($this->user->getId(), $this->testId);
+			$this->redirect('Test:');
 		}
 	}
 

@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
-			<h1 class="text-center">TEST: Sýkora koňadra</h1>
+			<h1 class="text-center">TEST: {$testInfo->name}</h1>
 		</div>
 	</div>
 	<div class="row">
@@ -36,7 +36,7 @@
 					<div class="col-md-5 align-self-center stat">
 						<div class="row">
 							<div class="col-sm-6"><h5>Otížnost testu:</h5></div>
-							<div class="col align-self-center"><h5 class="text-test-medium">{$testInfo->difficulty}</h5></div>
+							<div class="col align-self-center"><h5>{$testInfo->difficulty}</h5></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6"><h5>Čas na test:</h5></div>
@@ -52,11 +52,11 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-6"><h5>Počet správných odpovědí:</h5></div>
-							<div class="col align-self-center"><strong>{$good}</strong></div>
+							<div class="col align-self-center" style="color: green;"><strong>{$good}</strong></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6"><h5>Počet špatných odpovědí:</h5></div>
-							<div class="col align-self-center"><strong>{$bad}</strong></div>
+							<div class="col align-self-center" style="color: #d50009;"><strong>{$bad}</strong></div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6"><h5>Datum vyřešení:</h5></div>
@@ -105,7 +105,11 @@
 					<div class="col pt-2 pb-2">
 						<h3>Otázka č. {$key}: {$doneTestInfo['questions'][$key]->question}</h3>
 						<div class="pt-2 pb-4" align="center">
-							<img src="{$doneTestInfo['questions'][$key]->label}" class="img-fluid rounded" style="max-height: 300px;" alt="Sýkora koňadra" />
+							{if $doneTestInfo['questions'][$key]->type == 'IMG'}
+								<img src="{$doneTestInfo['questions'][$key]->label}" class="img-fluid rounded" style="max-height: 300px;" alt="Sýkora koňadra" />
+							{else}
+								<div style="height: 10px;"></div>
+							{/if}
 						</div>
 					</div>
 				</div>

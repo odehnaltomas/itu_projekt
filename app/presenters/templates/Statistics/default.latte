@@ -1,0 +1,94 @@
+{block content}
+<div class="first-div"></div>
+
+<div class="container mb-4">
+	<h1 class="display-3 header" align="center" style="color: #464646;" n:block=title>Statistiky testů</h1>
+</div>
+
+{snippet statSnippet}
+	<div class="container">
+		<div class="row mb-4">
+			<div class="col" align="center">
+				<h3 class="display-6 header mb-3" align="center" style="color: #464646;">Výběr testu:</h3>
+				<div class="btn-group">
+					<a class="btn btn-primary dropdown-toggle" style="min-width: 400px;" data-toggle="dropdown" href="#">{$test['info']->name} - {$test['info']->difficulty}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{foreach $tests as $testSel}
+							<a n:href="ChangeTest! $testSel->idtest" class="ajax"><li class="dropdown-item px-2" style="min-width: 400px;">{$testSel->name} - {$testSel->difficulty}</li></a>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-4">
+			<div class="col-md-4"></div>
+			<div class="col-md-2">
+				<span class="h4">Název testu: </span>
+			</div>
+
+			<div class="col align-self-center" style="padding-top:4px;">
+				<strong class="h5">{$test['info']->name}</strong>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+
+		<div class="row mb-4">
+			<div class="col-md-4"></div>
+			<div class="col-md-2">
+				<span class="h4">Obtížnost testu: </span>
+			</div>
+
+			<div class="col align-self-center" style="padding-top:4px;">
+				<strong class="h5">{$test['info']->difficulty}</strong>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+
+		<div class="row mb-5">
+			<div class="col-md-4"></div>
+			<div class="col-md-2">
+				<span class="h4">Čas na test: </span>
+			</div>
+
+			<div class="col align-self-center" style="padding-top:4px;">
+				<strong class="h5">{(int)($test['info']->time/60)} min {$test['info']->time%60} s</strong>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<table class="table">
+					<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Login</th>
+						<th scope="col">Úspěšnost</th>
+						<th scope="col">Čas vyřešení</th>
+					</tr>
+					</thead>
+					<tbody>
+					{if $test['percentage'] != null}
+						{var $i = 1}
+						{foreach $test['percentage'] as $key => $percentage}
+							{if $user->getId() == $test['userDoneTest'][$key]->user_iduser}
+								{var $background = '#cfffc5'}
+							{else}
+								{var $background = 'white'}
+							{/if}
+							<tr style="background: {$background|noescape};">
+								<th scope="row">{$i}</th>
+								<td>{$test['userLogin'][$key]}</td>
+								<td>{$percentage}%</td>
+								<td>{(int)(($test['info']->time - $test['userDoneTest'][$key]->remain_time)/60)} min {(int)(($test['info']->time - $test['userDoneTest'][$key]->remain_time)%60)} s</td>
+							</tr>
+							{var $i = $i + 1}
+						{/foreach}
+					{/if}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{/snippet}

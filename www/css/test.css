@@ -31,9 +31,39 @@ html, body {
     /*justify-content: center;*/
 }
 
-.test-img {
-    max-height: 300px;
+@media (min-height: 700px) {
+    .test-img {
+        max-height: 120px;
+    }
 }
+@media (min-height: 760px) {
+    .test-img {
+        max-height: 150px;
+    }
+}
+@media (min-height: 810px) {
+    .test-img {
+        max-height: 180px;
+    }
+}
+@media (min-height: 850px) {
+    .test-img {
+        max-height: 240px;
+    }
+}
+@media (min-height: 895px) {
+    .test-img {
+        max-height: 280px;
+    }
+}
+@media (min-height: 920px) {
+    .test-img {
+        max-height: 300px;
+    }
+}
+/*.test-img {*/
+    /*max-height: 300px;*/
+/*}*/
 
 .test-btn-active {
     background-color: #03a600 !important;
